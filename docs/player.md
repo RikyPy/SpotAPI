@@ -141,6 +141,21 @@ Overrides the player with a new track.
 player.play_track("spotify:track:6rqhFgbbKwnb9MLmUQDhG6", "spotify:playlist:37i9dQZF1DXcBWIGoYBM5M")
 ```
 
+
+### `play_track_without_playlist(self, track: str, /) -> None`
+
+**Description**:  
+Plays a track without a playlist context.
+
+**Parameters**:
+- **`track (str)`**: The track URI to play.
+
+**Example**:
+```python
+player.play_track_without_playlist("spotify:track:6rqhFgbbKwnb9MLmUQDhG6")
+```
+
+
 ### `repeat_track(self, value: bool, /) -> None`
 
 **Description**:  

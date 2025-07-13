@@ -287,6 +287,42 @@ class Player(PlayerStatus):
 
         self._play_song(self.device_id, self.active_id, track, playlist, uids[0])
 
+    def play_track_without_playlist(self, track: str, /) -> None:
+        """
+        Plays a track without a playlist context.
+
+        Parameters
+        ----------
+        track : str
+            The track uri to play.
+        """
+        if track.startswith("spotify:track:"):
+            track = track.split(":")[-1]
+
+        payload = {
+            "command": {
+                "context": {
+                    "uri": f"spotify:track:{track}",
+                    "url": f"context://spotify:track:{track}",
+                    "metadata": {}
+                },
+                "play_origin": {
+                    "feature_identifier": "track",
+                    "feature_version": "web-player_2025-07-13_1752399384629_844b9db",
+                    "referrer_identifier": "search"
+                },
+                "options": {
+                    "license": "tft",
+                    "skip_to": {},
+                    "player_options_override": {}
+                },
+                "logging_params": {"command_id": random_hex_string(32)},
+                "endpoint": "play"
+            }
+        }
+        
+        self._run_command(self.device_id, self.device_id, payload)
+
     def repeat_track(self, value: bool, /) -> None:
         """
         Repeats the current track.
